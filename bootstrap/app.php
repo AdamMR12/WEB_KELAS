@@ -11,8 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
+    ->withMiddleware(function (Middleware $middleware) {
+    $middleware->alias([
+            'level' => \App\Http\Middleware\CheckLevel::class,
+        ]);
+
+        // User yang sudah login diarahkan ke dashboard-nya, bukan '/'
+        $middleware->redirectUsersTo(fn () => route(auth()->user()->dashboardRoute()));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
