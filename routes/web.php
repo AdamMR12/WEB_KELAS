@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StrukturKelasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -36,10 +37,18 @@ Route::post('/logout', [LogoutController::class, 'logout'])
 // Dashboard per level
 Route::middleware(['auth', 'verified', 'level:1'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'admin'])->name('dashboard.admin');
+    Route::post('/struktur-kelas/pengurus', [StrukturKelasController::class, 'storePengurus'])->name('struktur-kelas.pengurus.store');
+    Route::put('/struktur-kelas/pengurus/{nim}', [StrukturKelasController::class, 'updatePengurus'])->name('struktur-kelas.pengurus.update');
+    Route::delete('/struktur-kelas/pengurus/{nim}', [StrukturKelasController::class, 'destroyPengurus'])->name('struktur-kelas.pengurus.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'level:2'])->group(function () {
     Route::get('/user/dashboard', [DashboardController::class, 'user'])->name('dashboard.user');
+});
+
+// Modul Struktur Kelas & Pengurus (Kelompok 4 â€” dapat diakses Admin & User)
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/struktur-kelas', [StrukturKelasController::class, 'index'])->name('struktur-kelas.index');
 });
 
 // Verifikasi email

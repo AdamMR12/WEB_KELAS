@@ -15,6 +15,11 @@
                         Dashboard
                     </a>
 
+                    <a href="{{ route('struktur-kelas.index') }}"
+                       class="px-3 py-2 rounded text-sm hover:bg-gray-100 {{ request()->routeIs('struktur-kelas.*') ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-gray-700' }}">
+                        Struktur Kelas
+                    </a>
+
                     {{-- Placeholder: ganti '#' dengan route saat fiturnya sudah dibuat --}}
                     <a href="#" class="px-3 py-2 rounded text-sm text-gray-400 cursor-not-allowed" title="Segera">
                         Memory Wall
@@ -57,8 +62,12 @@
         {{-- Menu mobile --}}
         <div id="mobile-menu" class="hidden md:hidden pb-3 pt-2 border-t space-y-1">
             <a href="{{ route(auth()->user()->dashboardRoute()) }}"
-               class="block px-3 py-2 rounded text-sm bg-gray-100 text-gray-700">
+               class="block px-3 py-2 rounded text-sm {{ request()->routeIs('dashboard.*') ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-gray-700 hover:bg-gray-100' }}">
                 Dashboard
+            </a>
+            <a href="{{ route('struktur-kelas.index') }}"
+               class="block px-3 py-2 rounded text-sm {{ request()->routeIs('struktur-kelas.*') ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-gray-700 hover:bg-gray-100' }}">
+                Struktur Kelas
             </a>
             <a href="#" class="block px-3 py-2 rounded text-sm text-gray-400">Memory Wall</a>
             <a href="#" class="block px-3 py-2 rounded text-sm text-gray-400">Tambah Memori</a>
