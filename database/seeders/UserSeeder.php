@@ -11,8 +11,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            ['name' => 'Admin Utama', 'email' => 'admin@memorywall.test', 'level' => User::LEVEL_ADMIN],
-            ['name' => 'User Biasa',  'email' => 'user@memorywall.test',  'level' => User::LEVEL_USER],
+            ['name' => 'Aakip Hasan Mutakin', 'email' => 'aakip@memorywall.test', 'level' => User::LEVEL_ADMIN],
+            ['name' => 'Admin Utama',         'email' => 'admin@memorywall.test', 'level' => User::LEVEL_ADMIN],
+            ['name' => 'User Biasa',          'email' => 'user@memorywall.test',  'level' => User::LEVEL_USER],
         ];
 
         foreach ($users as $u) {

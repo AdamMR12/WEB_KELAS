@@ -208,37 +208,34 @@ class DashboardController extends Controller
     {
         $candidates = [
             [
-                'label'       => 'Struktur Kelas & Pengurus',
-                'description' => 'Lihat susunan pengurus dan data kelas',
-                'route'       => 'struktur-kelas.index',
+                'label'       => 'Profil Kelas',
+                'description' => 'Identitas prodi, angkatan & daftar kelas',
+                'route'       => 'kelas.index',
                 'badge'       => 'Aktif',
                 'accent'      => 'indigo',
             ],
             [
                 'label'       => 'Data Mahasiswa',
-                'description' => 'Direktori anggota kelas',
+                'description' => 'Direktori & profil anggota kelas',
                 'route'       => 'mahasiswa.index',
-                'badge'       => 'Modul',
+                'badge'       => 'Aktif',
                 'accent'      => 'sky',
             ],
             [
-                'label'       => 'Memory Wall',
-                'description' => 'Galeri kenangan & momen kelas',
-                'route'       => 'memories.index',
-                'badge'       => 'Kolaborasi',
+                'label'       => 'Struktur Kelas & Pengurus',
+                'description' => 'Lihat susunan pengurus aktif',
+                'route'       => 'struktur-kelas.index',
+                'badge'       => 'Aktif',
+                'accent'      => 'emerald',
+            ],
+            [
+                'label'       => 'Generate Laporan',
+                'description' => 'Export data kelas & mahasiswa (PDF/Excel)',
+                'route'       => 'laporan.index',
+                'badge'       => 'Export',
                 'accent'      => 'amber',
             ],
         ];
-
-        if ($isAdmin) {
-            $candidates[] = [
-                'label'       => 'Kelola Pengurus',
-                'description' => 'Atur jabatan dan kontak pengurus',
-                'route'       => 'pengurus.index',
-                'badge'       => 'Admin',
-                'accent'      => 'emerald',
-            ];
-        }
 
         return collect($candidates)->map(function ($item) {
             $exists = Route::has($item['route']);
