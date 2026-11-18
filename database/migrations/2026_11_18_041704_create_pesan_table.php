@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('isi_pesan');
             $table->boolean('anonim')->default(false);
             $table->timestamp('tgl_buat')->useCurrent();
+            $table->timestamps();
         });
     }
 

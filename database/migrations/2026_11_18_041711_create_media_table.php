@@ -17,12 +17,13 @@ return new class extends Migration
             $table->string('file_path', 255);
             $table->string('caption', 255)->nullable();
             $table->timestamp('tgl_upload')->useCurrent();
+            $table->timestamps();
 
             $table->foreign('id_album')
-                ->references('id_album')
-                ->on('album')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                  ->references('id_album')
+                  ->on('album')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
         });
     }
 

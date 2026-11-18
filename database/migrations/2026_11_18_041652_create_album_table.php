@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_album');
             $table->string('nama_album', 100);
             $table->date('tgl_acara')->nullable();
+            $table->timestamps();
         });
     }
 

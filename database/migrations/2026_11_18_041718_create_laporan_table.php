@@ -13,23 +13,27 @@ return new class extends Migration
     {
         Schema::create('laporan', function (Blueprint $table) {
             $table->id('id_laporan');
+
+            // Salah satu harus diisi: media ATAU pesan yang dilaporkan
             $table->unsignedBigInteger('id_media')->nullable();
             $table->unsignedBigInteger('id_pesan')->nullable();
+
             $table->text('alasan');
             $table->enum('status', ['menunggu', 'ditindak', 'ditolak'])->default('menunggu');
             $table->timestamp('tanggal_laporan')->useCurrent();
+            $table->timestamps();
 
             $table->foreign('id_media')
-                ->references('id_media')
-                ->on('media')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                  ->references('id_media')
+                  ->on('media')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
 
             $table->foreign('id_pesan')
-                ->references('id_pesan')
-                ->on('pesan')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                  ->references('id_pesan')
+                  ->on('pesan')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
         });
     }
 
