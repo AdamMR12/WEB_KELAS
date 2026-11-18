@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->string('NIM', 15)->primary();
             $table->string('Nama_Mahasiswa', 100);
+            $table->date('Tanggal_Lahir');
             $table->string('Foto', 255)->nullable();
             $table->string('ID_Kelas', 10);
             $table->timestamps();

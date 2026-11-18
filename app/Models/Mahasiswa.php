@@ -19,9 +19,14 @@ class Mahasiswa extends Model
     protected $fillable = [
         'NIM',
         'Nama_Mahasiswa',
+        'Tanggal_Lahir',
         'Foto',
         'ID_Kelas',
     ];
+
+    protected $casts = [
+    'Tanggal_Lahir' => 'date',
+];
 
     public function kelas(): BelongsTo
     {
