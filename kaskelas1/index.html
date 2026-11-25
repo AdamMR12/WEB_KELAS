@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Dashboard Kas Kelas SI 2A - Politeknik Negeri Subang"
+  >
+
+  <meta
+    name="theme-color"
+    content="#5B3DF0"
+  >
+
+  <title>Dashboard | Kas Kelas SI 2A</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS utama -->
+  <link rel="stylesheet" href="css/style.css?v=3">
+
+  <style>
+    #gate{min-height:100dvh;display:grid;place-items:center;padding:32px 16px}
+    #gate .card{max-width:440px;width:100%}
+    #gate h1{font-size:1.6rem;margin-bottom:6px}
+    .hbtns{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
+    @media (min-width:720px){ .hbtns{margin-left:0} }
+    body.in-admin .hbtns{margin-left:auto}
+    #whoami{color:var(--muted);font-weight:600;font-size:.9rem;white-space:nowrap}
+    @media (max-width:480px){ #whoami{display:none} }
+    .hbtns #authBtn{margin-left:0}
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       SKIP LINK
+       ========================================================= -->
+
+  <a
+    href="#main"
+    class="skip"
+  >
+    Lewati ke konten utama
+  </a>
+
+
+  <!-- =========================================================
+       GERBANG LOGIN
+       Wajib login (NIM + password) sebelum bisa melihat dashboard.
+       ========================================================= -->
+
+  <div id="gate">
+
+    <section class="card" aria-labelledby="gate-title">
+
+      <h1 id="gate-title">
+        Masuk ke Kas Kelas SI 2A
+      </h1>
+
+      <p class="hint" style="margin-bottom:20px;">
+        Masukkan NIM dan password untuk melihat dashboard kas kelas.
+        Password kamu adalah NIM kamu sendiri.
+      </p>
+
+      <form id="gateForm">
+
+        <div class="field">
+          <label for="gNim">NIM</label>
+          <input
+            class="in"
+            id="gNim"
+            type="text"
+            inputmode="numeric"
+            autocomplete="username"
+            required
+            placeholder="Contoh: 10112001"
+          >
+        </div>
+
+        <div class="field" style="margin-top:14px;">
+          <label for="gPass">Password</label>
+          <input
+            class="in"
+            id="gPass"
+            type="password"
+            autocomplete="current-password"
+            required
+            placeholder="Password (NIM kamu)"
+          >
+        </div>
+
+        <p id="gateErr" class="err" hidden style="margin-top:14px;">
+          NIM atau password salah.
+        </p>
+
+        <div class="actions" style="margin-top:18px;">
+          <button type="submit" class="btn">
+            Masuk
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+
+  </div>
+
+
+  <!-- =========================================================
+       ISI APLIKASI (baru terlihat setelah login)
+       ========================================================= -->
+
+  <div id="appShell" hidden>
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+
+  <header class="top">
+
+    <div class="wrap hbar">
+
+      <!-- Brand -->
+      <a
+        href="#"
+        class="brand"
+        id="brandLink"
+        aria-label="Kembali ke dashboard Kas Kelas SI 2A"
+      >
+
+        <span
+          class="mark"
+          aria-hidden="true"
+        >
+          K
+        </span>
+
+        <span>
+          Kelas SI 2A
+        </span>
+
+      </a>
+
+
+      <!-- Navigasi -->
+      <nav
+        class="nav"
+        aria-label="Navigasi utama"
+      >
+
+        <a href="#dashboard">
+          Dashboard
+        </a>
+
+        <a href="#cek-iuran">
+          Cek iuran
+        </a>
+
+        <a href="#riwayat">
+          Riwayat kas
+        </a>
+
+        <a href="mahasiswa.html">
+          Mahasiswa
+        </a>
+
+        <a href="#" id="navAdminLink" hidden>
+          Panel admin
+        </a>
+
+      </nav>
+
+
+      <!-- Info user + Logout -->
+      <div class="hbtns">
+
+        <span id="whoami" class="hint"></span>
+
+        <button
+          type="button"
+          class="btn ghost"
+          id="authBtn"
+        >
+          Keluar
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+       ========================================================= -->
+
+  <main
+    id="main"
+    class="wrap"
+  >
+
+
+    <!-- =======================================================
+         PUBLIC DASHBOARD
+         ======================================================= -->
+
+    <div id="publicView">
+
+
+      <!-- =====================================================
+           DATA DEMO
+           ===================================================== -->
+
+      <div
+        id="demoBanner"
+        class="demo"
+        hidden
+      >
+
+        <strong>
+          Data contoh aktif.
+        </strong>
+
+        Data yang tampil masih berupa data demonstrasi.
+        Admin dapat mengosongkannya setelah masuk ke halaman admin.
+
+      </div>
+
+
+      <!-- =====================================================
+           DASHBOARD HERO
+           ===================================================== -->
+
+      <section
+        class="hero"
+        id="dashboard"
+        aria-labelledby="dashboard-title"
+      >
+
+
+        <!-- Intro -->
+        <div>
+
+          <p
+            class="hint"
+            style="margin-bottom:8px;"
+          >
+            DASHBOARD KELAS
+          </p>
+
+          <h1 id="dashboard-title">
+            Kas kelas SI 2A,
+            bisa dicek siapa saja.
+          </h1>
+
+          <p class="lead">
+            Lihat saldo kas, cek status iuran,
+            dan pantau riwayat transaksi kelas
+            tanpa harus login.
+          </p>
+
+
+          <!-- Saldo -->
+          <div class="saldo">
+
+            <span
+              class="coin"
+              aria-hidden="true"
+            >
+              Rp
+            </span>
+
+            <p class="lbl">
+              Saldo kas saat ini
+            </p>
+
+            <p
+              class="big"
+              id="saldoNum"
+            >
+              Rp&nbsp;0
+            </p>
+
+            <span
+              class="sr"
+              id="saldoSr"
+            >
+              Rp 0
+            </span>
+
+            <p class="upd">
+              Data terakhir diperbarui:
+              <strong id="updTime">
+                -
+              </strong>
+            </p>
+
+          </div>
+
+
+          <!-- Ringkasan pemasukan & pengeluaran -->
+          <div class="mini">
+
+            <div class="in">
+
+              <p>
+                Total pemasukan
+              </p>
+
+              <strong id="totMasuk">
+                Rp&nbsp;0
+              </strong>
+
+            </div>
+
+
+            <div class="out">
+
+              <p>
+                Total pengeluaran
+              </p>
+
+              <strong id="totKeluar">
+                Rp&nbsp;0
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             CEK IURAN
+             =================================================== -->
+
+        <section
+          class="card cek"
+          id="cek-iuran"
+          aria-labelledby="cek-title"
+        >
+
+          <h2 id="cek-title">
+            Cek status iuran
+          </h2>
+
+          <p class="hint">
+            Cari menggunakan nama atau NIM mahasiswa.
+          </p>
+
+
+          <!-- Search -->
+          <div
+            class="sbox"
+            style="margin-top:14px;"
+          >
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+
+              <circle
+                cx="11"
+                cy="11"
+                r="7"
+              />
+
+              <path
+                d="m20 20-4-4"
+              />
+
+            </svg>
+
+
+            <label
+              for="q"
+              class="sr"
+            >
+              Cari mahasiswa berdasarkan nama atau NIM
+            </label>
+
+            <input
+              type="search"
+              id="q"
+              class="in search"
+              placeholder="Cari nama atau NIM..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <!-- Ringkasan iuran -->
+          <p
+            class="sum"
+            id="sum"
+          >
+          </p>
+
+
+          <!-- Progress -->
+          <div
+            class="meter"
+            role="progressbar"
+            aria-label="Persentase mahasiswa yang sudah lunas"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+
+            <span id="barFill"></span>
+
+          </div>
+
+
+          <!-- Hasil pencarian -->
+          <ul
+            class="res"
+            id="res"
+            aria-live="polite"
+          >
+          </ul>
+
+        </section>
+
+      </section>
+
+
+      <!-- =====================================================
+           RIWAYAT TRANSAKSI
+           ===================================================== -->
+
+      <section
+        class="hist"
+        id="riwayat"
+        aria-labelledby="riwayat-title"
+      >
+
+        <div class="hist-head">
+
+          <div>
+
+            <h2 id="riwayat-title">
+              Riwayat transaksi
+            </h2>
+
+            <p class="sub">
+              Pantau pemasukan dan pengeluaran kas kelas
+              secara transparan.
+            </p>
+
+          </div>
+
+
+          <!-- Filter -->
+          <div
+            class="chips"
+            role="group"
+            aria-label="Filter jenis transaksi"
+          >
+
+            <button
+              type="button"
+              class="chip"
+              data-f="semua"
+              aria-pressed="true"
+            >
+              Semua
+            </button>
+
+            <button
+              type="button"
+              class="chip"
+              data-f="masuk"
+              aria-pressed="false"
+            >
+              Pemasukan
+            </button>
+
+            <button
+              type="button"
+              class="chip"
+              data-f="keluar"
+              aria-pressed="false"
+            >
+              Pengeluaran
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- Tabel transaksi -->
+        <div class="card tblwrap">
+
+          <table
+            class="tbl"
+          >
+
+            <thead>
+
+              <tr>
+
+                <th scope="col">
+                  Tanggal
+                </th>
+
+                <th scope="col">
+                  Jenis
+                </th>
+
+                <th scope="col">
+                  Keterangan
+                </th>
+
+                <th
+                  scope="col"
+                  class="num"
+                >
+                  Nominal
+                </th>
+
+                <th
+                  scope="col"
+                  class="num"
+                >
+                  Saldo
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="rows">
+            </tbody>
+
+          </table>
+
+
+          <!-- Kondisi kosong -->
+          <div
+            class="emptybox"
+            id="emptyHist"
+            hidden
+          >
+
+            <strong>
+              Belum ada transaksi.
+            </strong>
+
+            <span>
+              Riwayat transaksi akan muncul di sini
+              setelah kas mulai dicatat.
+            </span>
+
+          </div>
+
+        </div>
+
+        <div style="margin-top:32px">
+          <h2 id="bukti-title">Bukti pembayaran</h2>
+          <p class="sub">Foto bukti pembayaran yang diunggah bendahara. Ketuk foto untuk memperbesar.</p>
+          <div id="buktiGrid" class="bgrid"></div>
+          <div class="emptybox" id="emptyBukti" hidden>
+            <strong>Belum ada foto bukti pembayaran.</strong>
+            <span>Foto akan muncul di sini setelah bendahara mengunggahnya.</span>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- =======================================================
+         ADMIN DASHBOARD
+         ======================================================= -->
+
+    <div
+      id="adminView"
+      hidden
+    >
+      <!--
+        Konten admin dibuat oleh script.js.
+        Jangan hapus elemen ini karena script.js
+        menggunakan #adminView sebagai root admin.
+      -->
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer>
+
+    <div class="wrap fbox">
+
+      <strong>
+        Website Kelas SI 2A
+      </strong>
+
+      <span>
+        Politeknik Negeri Subang.
+      </span>
+
+      <span id="teamLine">
+        Dikelola Kelompok 6.
+      </span>
+
+      <span>
+        Data terakhir:
+        <strong id="updTime2">
+          -
+        </strong>
+      </span>
+
+    </div>
+
+  </footer>
+
+  </div>
+  <!-- /#appShell -->
+
+
+  <!-- =========================================================
+       CONFIRM DELETE DIALOG
+       ========================================================= -->
+
+    <dialog id="dlgPhoto" class="photo">
+    <form method="dialog">
+      <img id="photoImg" alt="Foto bukti pembayaran">
+      <p id="photoCap" class="hint"></p>
+      <div class="actions"><button class="btn" type="submit">Tutup</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="dlgConfirm">
+
+    <h2>
+      Konfirmasi
+    </h2>
+
+    <p
+      id="dlgConfirmMsg"
+      style="margin-bottom:18px;"
+    >
+      Apakah kamu yakin?
+    </p>
+
+
+    <form method="dialog">
+
+      <div class="actions">
+
+        <button
+          type="submit"
+          class="btn danger"
+          id="cfYes"
+          value="ya"
+        >
+          Ya, hapus
+        </button>
+
+        <button
+          type="submit"
+          class="btn ghost"
+          value="tidak"
+        >
+          Batal
+        </button>
+
+      </div>
+
+    </form>
+
+  </dialog>
+
+
+  <!-- =========================================================
+       SAVE BAR
+       ========================================================= -->
+
+  <div
+    class="savebar"
+    id="saveBar"
+    hidden
+  >
+
+    <div class="in-bar">
+
+      <span id="saveMsg">
+        Ada perubahan yang belum disimpan.
+      </span>
+
+      <button
+        type="button"
+        class="btn"
+        id="saveBtn"
+      >
+        Simpan perubahan
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       TOAST
+       ========================================================= -->
+
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+  >
+  </div>
+
+
+  <!-- =========================================================
+       DATA APLIKASI
+       ========================================================= -->
+
+  <script
+    type="application/json"
+    id="kas-data"
+  >
+  {
+    "updatedAt": "2026-09-21T00:00:00+07:00",
+
+    "settings": {
+      "iuran": 20000,
+      "bulan": 1,
+      "demo": true,
+
+      "treasurerNim": "10112058",
+      "pinHash": "9d214b0b40fde2a1985862e789917314434b1d8032d4240c6da992bed749e9d8"
+    },
+
+    "admins": [
+
+      {
+        "nama": "Nizar Misbahul Ulum",
+        "nim": "10112058",
+        "role": "Programmer"
+      },
+
+      {
+        "nama": "Zidan Maulana Haitami",
+        "nim": "10112085",
+        "role": "Programmer"
+      },
+
+      {
+        "nama": "Vina Noviyanti",
+        "nim": "10112079",
+        "role": ""
+      },
+
+      {
+        "nama": "Putri Nazila Syahrani",
+        "nim": "10112061",
+        "role": ""
+      },
+
+      {
+        "nama": "Yessy Aiska",
+        "nim": "10112082",
+        "role": "UI/UX Design"
+      }
+
+    ],
+
+    "mahasiswa": [
+
+      { "id": "m1",  "nim": "10112001", "nama": "Aakip Hasan Mutakin" },
+      { "id": "m2",  "nim": "10112004", "nama": "Adam Muhammad Rizqy" },
+      { "id": "m3",  "nim": "10112007", "nama": "Ahmad Septian Ramdani" },
+      { "id": "m4",  "nim": "10112010", "nama": "Al Ikhsan" },
+      { "id": "m5",  "nim": "10112013", "nama": "Alya Putri" },
+      { "id": "m6",  "nim": "10112016", "nama": "Aulia Putri Ramadina" },
+      { "id": "m7",  "nim": "10112019", "nama": "Cendra Kholifah Nuryadin" },
+      { "id": "m8",  "nim": "10112022", "nama": "Dealova Frazelia Setiawan" },
+      { "id": "m9",  "nim": "10112025", "nama": "Dian Dwi Nazira" },
+      { "id": "m10", "nim": "10112031", "nama": "Farid Nur Fahrudin" },
+      { "id": "m11", "nim": "10112034", "nama": "Gendis Wismaya Arimbi" },
+      { "id": "m12", "nim": "10112037", "nama": "Haikal Rizki Atallah" },
+      { "id": "m13", "nim": "10112043", "nama": "Meidina Fauziah Ulmi" },
+      { "id": "m14", "nim": "10112049", "nama": "Muhammad Nizar Zulhaqy" },
+      { "id": "m15", "nim": "10112052", "nama": "Nadyla Dwi Gayantry" },
+      { "id": "m16", "nim": "10112055", "nama": "Nazira Gilda" },
+      { "id": "m17", "nim": "10112058", "nama": "Nizar Misbahul Ulum" },
+      { "id": "m18", "nim": "10112061", "nama": "Putri Nazila Syahrani" },
+      { "id": "m19", "nim": "10112064", "nama": "Rafli El Shirazy" },
+      { "id": "m20", "nim": "10112067", "nama": "Regina Ayu Cahyanti" },
+      { "id": "m21", "nim": "10112070", "nama": "Riza Aditya Pirmansyah" },
+      { "id": "m22", "nim": "10112073", "nama": "Siti Nuraniyyah" },
+      { "id": "m23", "nim": "10112076", "nama": "Sukmadirjawijaya" },
+      { "id": "m24", "nim": "10112079", "nama": "Vina Noviyanti" },
+      { "id": "m25", "nim": "10112082", "nama": "Yessy Aiska" },
+      { "id": "m26", "nim": "10112085", "nama": "Zidan Maulana Haitami" }
+
+    ],
+
+    "transaksi": [
+
+      {
+        "id": "t1",
+        "tgl": "2026-09-01",
+        "jenis": "masuk",
+        "mhs": "m17",
+        "ket": "Iuran September",
+        "nominal": 20000
+      },
+
+      {
+        "id": "t2",
+        "tgl": "2026-09-01",
+        "jenis": "masuk",
+        "mhs": "m26",
+        "ket": "Iuran September",
+        "nominal": 20000
+      },
+
+      {
+        "id": "t3",
+        "tgl": "2026-09-02",
+        "jenis": "masuk",
+        "mhs": "m24",
+        "ket": "Iuran September",
+        "nominal": 20000
+      },
+
+      {
+        "id": "t4",
+        "tgl": "2026-09-03",
+        "jenis": "masuk",
+        "mhs": "m18",
+        "ket": "Iuran September",
+        "nominal": 20000
+      },
+
+      {
+        "id": "t5",
+        "tgl": "2026-09-08",
+        "jenis": "keluar",
+        "mhs": null,
+        "ket": "Fotokopi materi praktikum",
+        "nominal": 15000
+      },
+
+      {
+        "id": "t6",
+        "tgl": "2026-09-15",
+        "jenis": "keluar",
+        "mhs": null,
+        "ket": "Spidol dan penghapus papan tulis",
+        "nominal": 25000
+      },
+
+      {
+        "id": "t7",
+        "tgl": "2026-09-16",
+        "jenis": "masuk",
+        "mhs": null,
+        "ket": "Sumbangan sukarela",
+        "nominal": 10000
+      }
+
+    ]
+  }
+  </script>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+
+  <script src="js/script.js?v=3"></script>
+
+</body>
+</html>

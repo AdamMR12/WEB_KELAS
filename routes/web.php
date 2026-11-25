@@ -11,7 +11,9 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    // Halaman utama diarahkan ke modul Kas Kelas.
+    // Jika belum login, middleware 'kas' akan meneruskan ke /kas/login.
+    return redirect()->route('kas.dashboard');
 })->name('home');
 
 // Guest (belum login)

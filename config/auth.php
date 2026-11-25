@@ -42,6 +42,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // Modul Kas Kelas (tabel `pengguna`), terpisah dari login bawaan
+        'kas' => [
+            'driver' => 'session',
+            'provider' => 'pengguna',
+        ],
     ],
 
     /*
@@ -65,6 +71,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
+        ],
+
+        'pengguna' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Pengguna::class,
         ],
 
         // 'users' => [

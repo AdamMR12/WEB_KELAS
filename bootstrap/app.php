@@ -10,10 +10,16 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        then: function () {
+            // Modul Kas Kelas (prefix /kas)
+            \Illuminate\Support\Facades\Route::middleware('web')
+                ->group(base_path('routes/kas.php'));
+        },
     )
     ->withMiddleware(function (Middleware $middleware) {
     $middleware->alias([
             'level' => \App\Http\Middleware\CheckLevel::class,
+            'kas'   => \App\Http\Middleware\KasAuth::class,
         ]);
 
         // User yang sudah login diarahkan ke dashboard-nya, bukan '/'
