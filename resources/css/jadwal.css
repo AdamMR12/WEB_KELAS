@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --color-brand-canvas: #f0f9ff;
+    --color-brand-primary: #38bdf8;
+    --color-brand-primary-ink: #082f49;
+    --color-brand-secondary: #0c4a6e;
+    --color-brand-soft: #e0f2fe;
+    --color-brand-card: #ffffff;
+    --color-brand-muted: #475569;
+}
+
+/* Light mode theme tokens (Light Blue + White) */
+:root {
+    --app-bg: #f0f9ff;
+    --card-main-bg: #ffffff;
+    --card-sub-bg: #f8fafc;
+    --text-heading: #0f172a;
+    --text-body: #1e293b;
+    --text-muted: #475569;
+    --border-color: #cbd5e1;
+}
+
+body {
+    background-color: var(--app-bg);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+}
+
+.theme-card-main {
+    background-color: var(--card-main-bg);
+}
+
+.theme-card-sub {
+    background-color: var(--card-sub-bg);
+}
+
+.theme-sidebar {
+    background-color: var(--sidebar-bg);
+}
+
+.theme-heading {
+    color: var(--text-heading);
+}
+
+.theme-muted {
+    color: var(--text-muted);
+}
+
+.theme-border {
+    border-color: var(--border-color);
+}
+
+/* ---------- Animasi interaktif (GSAP / Motion / Lenis) ---------- */
+/* Sembunyikan elemen sebelum intro GSAP berjalan; kelas .js dipasang di <head> */
+.js [data-anim],
+.js [data-reveal] {
+    visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-anim],
+    .js [data-reveal] {
+        visibility: visible;
+    }
+}
+
+/* Transform dikendalikan JS, jadi CSS transition tidak boleh ikut menganimasikannya */
+[data-press],
+[data-tilt],
+[data-magnetic],
+[data-hover-lift],
+[data-reveal] {
+    transition-property: color, background-color, border-color, box-shadow;
+}
+
+[data-anim="title"] {
+    overflow: hidden;
+}
