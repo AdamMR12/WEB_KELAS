@@ -6,11 +6,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Jadwal Perkuliahan & Agenda') - Web Kelas</title>
     <script>
-        // Sembunyikan elemen animasi sampai app.js siap; fallback tampil jika JS gagal dimuat
+        // Sembunyikan elemen animasi sampai script siap; fallback tampil jika JS gagal dimuat
         document.documentElement.classList.add('js');
-        setTimeout(() => { if (!window.__animReady) document.documentElement.classList.remove('js'); }, 2500);
+        setTimeout(() => { if (!window.__animReady) document.documentElement.classList.remove('js'); }, 1200);
     </script>
-    @vite(['resources/css/jadwal.css', 'resources/js/jadwal.js'])
+    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=2">
+    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=2"></script>
 </head>
 <body class="min-h-screen bg-[#F0F9FF] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#38BDF8] selection:text-[#082F49]">
 
