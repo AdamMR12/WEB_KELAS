@@ -221,7 +221,7 @@ function manageModal() {
         tab.addEventListener('click', () => {
             tabs.forEach((t) => {
                 const active = t === tab;
-                t.classList.toggle('text-[#0c4a6e]', active);
+                t.classList.toggle('text-[#1d4ed8]', active);
                 t.classList.toggle('text-slate-400', !active);
                 t.setAttribute('aria-selected', String(active));
                 $(`#${t.dataset.tab}`).classList.toggle('hidden', !active);

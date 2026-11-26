@@ -18,7 +18,7 @@
 
 @section('hero_action')
     @if(auth()->user()?->isAdmin())
-    <a id="createScheduleBtn" href="{{ route('jadwal.create', ['tanggal' => $selectedDate]) }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#38BDF8] text-[#082F49] text-xs md:text-sm font-semibold hover:bg-[#0EA5E9] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
+    <a id="createScheduleBtn" href="{{ route('jadwal.create', ['tanggal' => $selectedDate]) }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#1D4ED8] text-white text-xs md:text-sm font-semibold hover:bg-[#1E40AF] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
         </svg>
@@ -34,7 +34,7 @@
     <div class="lg:col-span-4 xl:col-span-3 flex flex-col gap-4">
         
         <!-- MINI CALENDAR CARD -->
-        <div id="miniCalendar" data-reveal class="bg-[#0C4A6E] rounded-3xl p-5 text-white shadow-sm">
+        <div id="miniCalendar" data-reveal class="bg-[#0369A1] rounded-3xl p-5 text-white shadow-sm">
             <!-- Calendar Header -->
             <div class="flex items-center justify-between mb-3">
                 <span class="font-bold text-sm tracking-tight capitalize">{{ $monthName }}</span>
@@ -74,7 +74,7 @@
                     <div class="flex items-center justify-center">
                         <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $dayStr])) }}"
                            data-jadwal-nav data-press class="w-7 h-7 flex items-center justify-center rounded-full transition text-xs
-                           {{ $isSelected ? 'bg-[#38BDF8] text-[#082F49] font-bold shadow' : ($isToday ? 'border-2 border-[#38BDF8] text-white font-bold' : 'text-white hover:bg-white/20') }}"
+                           {{ $isSelected ? 'bg-white text-[#1D4ED8] font-bold shadow' : ($isToday ? 'border-2 border-white text-white font-bold' : 'text-white hover:bg-white/20') }}"
                            title="{{ $isToday ? 'Hari Ini' : '' }}">
                             {{ $day }}
                         </a>
@@ -87,7 +87,7 @@
         <div id="filterCard" data-reveal class="theme-card-main rounded-3xl p-5 shadow-sm border theme-border">
             <div class="flex items-center justify-between mb-3">
                 <span class="font-bold text-xs theme-heading">Jadwal Pengganti</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#E0F2FE] text-[#0C4A6E]">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DBEAFE] text-[#1E3A8A]">
                     Filter
                 </span>
             </div>
@@ -95,8 +95,8 @@
             <div class="space-y-2 text-xs">
                 <!-- Checkbox 1: Tampilkan Kuliah Pengganti -->
                 <a href="{{ route('jadwal.index', array_merge(request()->query(), ['show_pengganti' => $showPengganti ? '0' : '1'])) }}" 
-                   data-jadwal-nav data-press class="flex items-start gap-2.5 p-2 rounded-2xl transition {{ $showPengganti ? 'bg-[#E0F2FE]' : 'hover:bg-slate-50' }}">
-                    <div class="w-4 h-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 {{ $showPengganti ? 'bg-[#0C4A6E] text-white' : 'border border-slate-300' }}">
+                   data-jadwal-nav data-press class="flex items-start gap-2.5 p-2 rounded-2xl transition {{ $showPengganti ? 'bg-[#DBEAFE]' : 'hover:bg-slate-50' }}">
+                    <div class="w-4 h-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 {{ $showPengganti ? 'bg-[#1D4ED8] text-white' : 'border border-slate-300' }}">
                         @if($showPengganti)
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         @endif
@@ -109,8 +109,8 @@
 
                 <!-- Checkbox 2: Sembunyikan Non-Akademik -->
                 <a href="{{ route('jadwal.index', array_merge(request()->query(), ['hide_non_akademik' => $hideNonAkademik ? '0' : '1'])) }}" 
-                   data-jadwal-nav data-press class="flex items-start gap-2.5 p-2 rounded-2xl transition {{ $hideNonAkademik ? 'bg-[#E0F2FE]' : 'hover:bg-slate-50' }}">
-                    <div class="w-4 h-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 {{ $hideNonAkademik ? 'bg-[#0C4A6E] text-white' : 'border border-slate-300' }}">
+                   data-jadwal-nav data-press class="flex items-start gap-2.5 p-2 rounded-2xl transition {{ $hideNonAkademik ? 'bg-[#DBEAFE]' : 'hover:bg-slate-50' }}">
+                    <div class="w-4 h-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 {{ $hideNonAkademik ? 'bg-[#1D4ED8] text-white' : 'border border-slate-300' }}">
                         @if($hideNonAkademik)
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         @endif
@@ -126,11 +126,11 @@
         <div id="nonAkademikSlot">
         @if(!$hideNonAkademik)
         <a href="{{ route('agenda.index') }}" data-reveal data-hover-lift class="theme-card-main rounded-3xl p-4 shadow-sm border theme-border flex items-center gap-3.5 hover:shadow-md transition group">
-            <div class="w-9 h-9 rounded-full bg-[#FEF3C7] text-[#78350F] font-bold text-xs flex items-center justify-center shrink-0">
+            <div class="w-9 h-9 rounded-full bg-[#FEF3C7] text-[#B45309] font-bold text-xs flex items-center justify-center shrink-0">
                 AG
             </div>
             <div class="min-w-0">
-                <span class="font-bold text-xs theme-heading block group-hover:text-[#0369A1] transition">Agenda Non-Akademik</span>
+                <span class="font-bold text-xs theme-heading block group-hover:text-[#1D4ED8] transition">Agenda Non-Akademik</span>
                 <span class="text-[#0369A1] text-xs">Kegiatan & Agenda Himpunan</span>
             </div>
             <div class="ml-auto text-slate-400 group-hover:translate-x-1 transition">
@@ -157,19 +157,19 @@
                     <h2 class="text-base md:text-lg font-bold theme-heading tracking-tight capitalize">
                         {{ $formattedDate }}
                     </h2>
-                    <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#E0F2FE] text-[#0C4A6E]">
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#DBEAFE] text-[#1E3A8A]">
                         Pekan Perkuliahan Reguler
                     </span>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $todayDate])) }}" data-jadwal-nav data-press class="px-3.5 py-1.5 rounded-full bg-[#38BDF8] text-[#082F49] text-xs font-semibold hover:bg-[#0EA5E9] transition">
+                    <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $todayDate])) }}" data-jadwal-nav data-press class="px-3.5 py-1.5 rounded-full bg-[#1D4ED8] text-white text-xs font-semibold hover:bg-[#1E40AF] transition">
                         Hari Ini
                     </a>
-                    <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $prevDayDate])) }}" data-jadwal-nav data-press title="Hari Sebelumnya" class="w-7 h-7 rounded-full border theme-border flex items-center justify-center text-slate-600 hover:text-[#0C4A6E] hover:bg-[#F0F9FF] transition">
+                    <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $prevDayDate])) }}" data-jadwal-nav data-press title="Hari Sebelumnya" class="w-7 h-7 rounded-full border theme-border flex items-center justify-center text-slate-600 hover:text-[#1D4ED8] hover:bg-[#F8FAFC] transition">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                     </a>
-                    <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $nextDayDate])) }}" data-jadwal-nav data-press title="Hari Berikutnya" class="w-7 h-7 rounded-full border theme-border flex items-center justify-center text-slate-600 hover:text-[#0C4A6E] hover:bg-[#F0F9FF] transition">
+                    <a href="{{ route('jadwal.index', array_merge(request()->query(), ['tanggal' => $nextDayDate])) }}" data-jadwal-nav data-press title="Hari Berikutnya" class="w-7 h-7 rounded-full border theme-border flex items-center justify-center text-slate-600 hover:text-[#1D4ED8] hover:bg-[#F8FAFC] transition">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                     </a>
                 </div>
@@ -187,7 +187,7 @@
                         <!-- Schedule Card -->
                         <div class="flex-1">
                             @if($loop->first)
-                                <div class="inline-block mb-2 px-2.5 py-0.5 rounded-full bg-[#0C4A6E] text-white text-[9px] font-bold tracking-wider uppercase">
+                                <div class="inline-block mb-2 px-2.5 py-0.5 rounded-full bg-[#0369A1] text-white text-[9px] font-bold tracking-wider uppercase">
                                     {{ strtoupper($formattedDate) }}
                                 </div>
                             @endif
@@ -294,7 +294,7 @@
                     <div data-schedule-item class="py-12 text-center">
                         <p class="text-slate-400 text-xs">Tidak ada jadwal perkuliahan pada tanggal ini.</p>
                         @if(auth()->user()?->isAdmin())
-                        <a href="{{ route('jadwal.create', ['tanggal' => $selectedDate]) }}" class="inline-block mt-2.5 px-4 py-1.5 rounded-full bg-[#38BDF8] text-[#082F49] text-xs font-semibold hover:bg-[#0EA5E9] transition">
+                        <a href="{{ route('jadwal.create', ['tanggal' => $selectedDate]) }}" class="inline-block mt-2.5 px-4 py-1.5 rounded-full bg-[#1D4ED8] text-white text-xs font-semibold hover:bg-[#1E40AF] transition">
                             + Tambah Jadwal Baru
                         </a>
                         @endif

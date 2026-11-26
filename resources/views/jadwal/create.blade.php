@@ -6,7 +6,7 @@
 @section('page_subtitle', 'Semester Ganjil 2026/2027 | D4 Sistem Informasi')
 
 @section('hero_action')
-    <a href="{{ route('jadwal.index', ['tanggal' => $selectedDate]) }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#0C4A6E] text-white text-xs md:text-sm font-semibold hover:bg-[#075985] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
+    <a href="{{ route('jadwal.index', ['tanggal' => $selectedDate]) }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#0369A1] text-white text-xs md:text-sm font-semibold hover:bg-[#075985] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
         </svg>
@@ -21,7 +21,7 @@
         <!-- Header Row -->
         <div class="flex items-center justify-between pb-4 mb-5 border-b theme-border">
             <div class="flex items-center gap-3">
-                <a href="{{ route('jadwal.index', ['tanggal' => $selectedDate]) }}" class="w-8 h-8 rounded-full border theme-border flex items-center justify-center text-slate-600 hover:text-[#0C4A6E] hover:bg-[#F0F9FF] transition" title="Kembali">
+                <a href="{{ route('jadwal.index', ['tanggal' => $selectedDate]) }}" class="w-8 h-8 rounded-full border theme-border flex items-center justify-center text-slate-600 hover:text-[#1D4ED8] hover:bg-[#F8FAFC] transition" title="Kembali">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                 </a>
                 <div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <span class="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#E0F2FE] text-[#0C4A6E]">
+            <span class="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#DBEAFE] text-[#1E3A8A]">
                 Kelas SI - 2A
             </span>
         </div>
@@ -54,7 +54,7 @@
                     Mata Kuliah <span class="text-red-500">*</span>
                 </label>
                 <input type="text" id="nama_matakuliah" name="nama_matakuliah" list="mkList" value="{{ old('nama_matakuliah') }}" required placeholder="Pilih atau ketik mata kuliah (mis. Pemrograman Web)"
-                       class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition placeholder:text-slate-400">
+                       class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
                 <datalist id="mkList">
                     @foreach($mataKuliahList as $mk)
                         <option value="{{ $mk->nama_mk }}" data-sks="{{ $mk->sks }}">{{ $mk->kode_mk }} ({{ $mk->sks }} SKS)</option>
@@ -69,14 +69,14 @@
                         Beban SKS <span class="text-red-500">*</span>
                     </label>
                     <input type="number" id="sks" name="sks" value="{{ old('sks', 3) }}" min="1" max="6" required
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                 </div>
                 <div>
                     <label for="hari" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
                         Hari Perkuliahan <span class="text-red-500">*</span>
                     </label>
                     <select id="hari" name="hari" required
-                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                         @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'] as $hari)
                             <option value="{{ $hari }}" {{ old('hari', $dayName ?? 'Senin') === $hari ? 'selected' : '' }}>{{ $hari }}</option>
                         @endforeach
@@ -91,21 +91,21 @@
                         Tanggal <span class="text-red-500">*</span>
                     </label>
                     <input type="date" id="tanggal" name="tanggal" value="{{ old('tanggal', $selectedDate) }}" required
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                 </div>
                 <div>
                     <label for="jam_mulai" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
                         Jam Mulai <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="jam_mulai" name="jam_mulai" value="{{ old('jam_mulai', '08:00') }}" required placeholder="08:00"
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                 </div>
                 <div>
                     <label for="jam_selesai" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
                         Jam Selesai <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="jam_selesai" name="jam_selesai" value="{{ old('jam_selesai', '10:00') }}" required placeholder="10:00"
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                 </div>
             </div>
 
@@ -116,7 +116,7 @@
                         Ruang Kuliah / Lab <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="ruang" name="ruang" list="ruangList" value="{{ old('ruang') }}" required placeholder="Pilih atau ketik ruangan (mis. Lab Komputer 3)"
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition placeholder:text-slate-400">
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
                     <datalist id="ruangList">
                         @foreach($ruanganList as $r)
                             <option value="{{ $r->nama_ruangan }}"></option>
@@ -128,7 +128,7 @@
                         Dosen Pengampu <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="dosen" name="dosen" list="dosenList" value="{{ old('dosen') }}" required placeholder="Pilih atau ketik dosen (mis. Pak Hendra, M.Kom.)"
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition placeholder:text-slate-400">
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
                     <datalist id="dosenList">
                         @foreach($dosenList as $d)
                             <option value="{{ $d->nama }}">{{ $d->nip }}</option>
@@ -144,7 +144,7 @@
                         Jenis Mata Kuliah
                     </label>
                     <select id="jenis" name="jenis"
-                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                         <option value="Mata Kuliah Wajib" {{ old('jenis') === 'Mata Kuliah Wajib' ? 'selected' : '' }}>Mata Kuliah Wajib</option>
                         <option value="Mata Kuliah Pilihan" {{ old('jenis') === 'Mata Kuliah Pilihan' ? 'selected' : '' }}>Mata Kuliah Pilihan</option>
                         <option value="Kuliah Pengganti" {{ old('jenis') === 'Kuliah Pengganti' ? 'selected' : '' }}>Kuliah Pengganti</option>
@@ -155,7 +155,7 @@
                         Metode Perkuliahan
                     </label>
                     <select id="metode" name="metode"
-                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#38BDF8] focus:outline-hidden transition">
+                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
                         <option value="Praktikum Lab" {{ old('metode') === 'Praktikum Lab' ? 'selected' : '' }}>Praktikum Lab</option>
                         <option value="Teori Kelas" {{ old('metode') === 'Teori Kelas' ? 'selected' : '' }}>Teori Kelas</option>
                         <option value="Kuliah Tambahan" {{ old('metode') === 'Kuliah Tambahan' ? 'selected' : '' }}>Kuliah Tambahan</option>
@@ -256,14 +256,14 @@
             </div>
 
             <!-- 7. Opsi Kuliah Pengganti -->
-            <div class="p-4 rounded-2xl bg-[#F0F9FF] border border-[#BAE6FD] flex items-center justify-between">
+            <div class="p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] flex items-center justify-between">
                 <div>
                     <span class="font-bold text-xs theme-heading block">Sesi Kuliah Pengganti</span>
                     <span class="text-[11px] text-[#475569]">Aktifkan jika jadwal ini merupakan sesi pengganti dari jadwal reguler.</span>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" name="is_pengganti" value="1" {{ old('is_pengganti') ? 'checked' : '' }} class="sr-only peer">
-                    <div class="w-11 h-6 bg-slate-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0C4A6E]"></div>
+                    <div class="w-11 h-6 bg-slate-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1D4ED8]"></div>
                 </label>
             </div>
 
@@ -272,7 +272,7 @@
                 <a href="{{ route('jadwal.index', ['tanggal' => $selectedDate]) }}" class="px-5 py-2.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-800 transition">
                     Batal
                 </a>
-                <button type="submit" data-press data-magnetic class="px-6 py-2.5 rounded-full bg-[#38BDF8] text-[#082F49] text-xs font-semibold hover:bg-[#0EA5E9] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
+                <button type="submit" data-press data-magnetic class="px-6 py-2.5 rounded-full bg-[#1D4ED8] text-white text-xs font-semibold hover:bg-[#1E40AF] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                     <span>Simpan Jadwal Kuliah</span>
                 </button>

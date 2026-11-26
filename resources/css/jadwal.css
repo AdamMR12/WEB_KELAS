@@ -6,18 +6,19 @@
 
 @theme {
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --color-brand-canvas: #f0f9ff;
-    --color-brand-primary: #38bdf8;
-    --color-brand-primary-ink: #082f49;
-    --color-brand-secondary: #0c4a6e;
-    --color-brand-soft: #e0f2fe;
+    --color-brand-canvas: #f8fafc;
+    --color-brand-primary: #1d4ed8;
+    --color-brand-primary-hover: #1e40af;
+    --color-brand-secondary: #0369a1;
+    --color-brand-soft: #dbeafe;
+    --color-brand-accent: #b45309;
     --color-brand-card: #ffffff;
     --color-brand-muted: #475569;
 }
 
-/* Light mode theme tokens (Light Blue + White) */
+/* Light mode theme tokens (Cobalt Blue + Cerulean Blue + Amber) */
 :root {
-    --app-bg: #f0f9ff;
+    --app-bg: #f8fafc;
     --card-main-bg: #ffffff;
     --card-sub-bg: #f8fafc;
     --text-heading: #0f172a;
