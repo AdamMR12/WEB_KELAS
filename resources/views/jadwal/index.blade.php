@@ -249,6 +249,9 @@
                                 <!-- Card Header: Title & SKS -->
                                 <div class="flex items-center justify-between gap-3 mb-2">
                                     <h3 class="font-bold text-sm md:text-base tracking-tight">
+                                        @if($item->kode_mk && $item->kode_mk !== '-')
+                                            <span class="mr-1.5 text-xs font-semibold opacity-80">[{{ $item->kode_mk }}]</span>
+                                        @endif
                                         {{ $item->nama_matakuliah }}
                                         @if($item->is_pengganti)
                                             <span class="ml-1.5 text-xs font-normal opacity-80">(Kuliah Pengganti)</span>
@@ -275,7 +278,12 @@
                                 <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs font-medium {{ $cardStyle['sub'] }} mb-3">
                                     <span>Waktu: {{ $item->jam_mulai }} - {{ $item->jam_selesai }} WIB</span>
                                     <span>Ruang: {{ $item->ruang }}</span>
-                                    <span class="italic">Dosen: {{ $item->dosen }}</span>
+                                    <span class="italic">
+                                        Dosen: {{ $item->dosen }}
+                                        @if($item->nip_dosen && $item->nip_dosen !== '-')
+                                            (NIP: {{ $item->nip_dosen }})
+                                        @endif
+                                    </span>
                                 </div>
 
                                 <!-- Badges -->

@@ -48,28 +48,43 @@
         <form action="{{ route('jadwal.store') }}" method="POST" data-stagger class="space-y-5 text-xs">
             @csrf
 
-            <!-- 1. Nama Mata Kuliah -->
-            <div>
-                <label for="nama_matakuliah" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
-                    Mata Kuliah <span class="text-red-500">*</span>
-                </label>
-                <input type="text" id="nama_matakuliah" name="nama_matakuliah" list="mkList" value="{{ old('nama_matakuliah') }}" required placeholder="Pilih atau ketik mata kuliah (mis. Pemrograman Web)"
-                       class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
-                <datalist id="mkList">
-                    @foreach($mataKuliahList as $mk)
-                        <option value="{{ $mk->nama_mk }}" data-sks="{{ $mk->sks }}">{{ $mk->kode_mk }} ({{ $mk->sks }} SKS)</option>
-                    @endforeach
-                </datalist>
+            <!-- 1. Kode MK & Nama Mata Kuliah -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="kode_mk" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
+                        Kode MK
+                    </label>
+                    <input type="text" id="kode_mk" name="kode_mk" value="{{ old('kode_mk') }}" placeholder="Contoh: SI201"
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
+                </div>
+                <div class="md:col-span-2">
+                    <label for="nama_matakuliah" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
+                        Mata Kuliah <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="nama_matakuliah" name="nama_matakuliah" value="{{ old('nama_matakuliah') }}" required placeholder="Ketik nama mata kuliah (mis. Pemrograman Web)"
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
+                </div>
             </div>
 
-            <!-- 2. SKS & Hari -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 2. SKS, Tipe SKS & Hari -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label for="sks" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
                         Beban SKS <span class="text-red-500">*</span>
                     </label>
                     <input type="number" id="sks" name="sks" value="{{ old('sks', 3) }}" min="1" max="6" required
                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
+                </div>
+                <div>
+                    <label for="tipe_sks" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
+                        Tipe SKS <span class="text-red-500">*</span>
+                    </label>
+                    <select id="tipe_sks" name="tipe_sks" required
+                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
+                        <option value="Teori" {{ old('tipe_sks') === 'Teori' ? 'selected' : '' }}>Teori</option>
+                        <option value="Praktek" {{ old('tipe_sks') === 'Praktek' ? 'selected' : '' }}>Praktek</option>
+                        <option value="Teori & Praktek" {{ old('tipe_sks', 'Teori & Praktek') === 'Teori & Praktek' ? 'selected' : '' }}>Keduanya (Teori &amp; Praktek)</option>
+                    </select>
                 </div>
                 <div>
                     <label for="hari" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
@@ -109,13 +124,27 @@
                 </div>
             </div>
 
-            <!-- 4. Ruangan & Dosen -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 4. Dosen, NIP & Ruangan -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="dosen" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
+                        Dosen Pengampu <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="dosen" name="dosen" value="{{ old('dosen') }}" required placeholder="Ketik nama dosen"
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
+                </div>
+                <div>
+                    <label for="nip" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
+                        NIP Dosen
+                    </label>
+                    <input type="text" id="nip" name="nip" value="{{ old('nip') }}" placeholder="Contoh: 198801012015041001"
+                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
+                </div>
                 <div>
                     <label for="ruang" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
                         Ruang Kuliah / Lab <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" id="ruang" name="ruang" list="ruangList" value="{{ old('ruang') }}" required placeholder="Pilih atau ketik ruangan (mis. Lab Komputer 3)"
+                    <input type="text" id="ruang" name="ruang" list="ruangList" value="{{ old('ruang') }}" required placeholder="Pilih atau ketik ruangan"
                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
                     <datalist id="ruangList">
                         @foreach($ruanganList as $r)
@@ -123,44 +152,19 @@
                         @endforeach
                     </datalist>
                 </div>
-                <div>
-                    <label for="dosen" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
-                        Dosen Pengampu <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" id="dosen" name="dosen" list="dosenList" value="{{ old('dosen') }}" required placeholder="Pilih atau ketik dosen (mis. Pak Hendra, M.Kom.)"
-                           class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
-                    <datalist id="dosenList">
-                        @foreach($dosenList as $d)
-                            <option value="{{ $d->nama }}">{{ $d->nip }}</option>
-                        @endforeach
-                    </datalist>
-                </div>
             </div>
 
-            <!-- 5. Jenis & Metode -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="jenis" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
-                        Jenis Mata Kuliah
-                    </label>
-                    <select id="jenis" name="jenis"
-                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
-                        <option value="Mata Kuliah Wajib" {{ old('jenis') === 'Mata Kuliah Wajib' ? 'selected' : '' }}>Mata Kuliah Wajib</option>
-                        <option value="Mata Kuliah Pilihan" {{ old('jenis') === 'Mata Kuliah Pilihan' ? 'selected' : '' }}>Mata Kuliah Pilihan</option>
-                        <option value="Kuliah Pengganti" {{ old('jenis') === 'Kuliah Pengganti' ? 'selected' : '' }}>Kuliah Pengganti</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="metode" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
-                        Metode Perkuliahan
-                    </label>
-                    <select id="metode" name="metode"
-                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
-                        <option value="Praktikum Lab" {{ old('metode') === 'Praktikum Lab' ? 'selected' : '' }}>Praktikum Lab</option>
-                        <option value="Teori Kelas" {{ old('metode') === 'Teori Kelas' ? 'selected' : '' }}>Teori Kelas</option>
-                        <option value="Kuliah Tambahan" {{ old('metode') === 'Kuliah Tambahan' ? 'selected' : '' }}>Kuliah Tambahan</option>
-                    </select>
-                </div>
+            <!-- 5. Jenis Mata Kuliah -->
+            <div>
+                <label for="jenis" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
+                    Jenis Mata Kuliah
+                </label>
+                <select id="jenis" name="jenis"
+                        class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition">
+                    <option value="Mata Kuliah Wajib" {{ old('jenis') === 'Mata Kuliah Wajib' ? 'selected' : '' }}>Mata Kuliah Wajib</option>
+                    <option value="Mata Kuliah Pilihan" {{ old('jenis') === 'Mata Kuliah Pilihan' ? 'selected' : '' }}>Mata Kuliah Pilihan</option>
+                    <option value="Kuliah Pengganti" {{ old('jenis') === 'Kuliah Pengganti' ? 'selected' : '' }}>Kuliah Pengganti</option>
+                </select>
             </div>
 
             <!-- 6. Pilihan Gaya Kartu (Maksimal 7 Pilihan Warna UI) -->
@@ -280,6 +284,73 @@
         </form>
 
     </div>
+
+    <!-- Kelola Master Mata Kuliah (Kode MK) & Dosen (NIP) -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+        <section class="theme-card-main rounded-3xl p-5 shadow-sm border theme-border">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b theme-border">
+                <h3 class="text-sm font-bold theme-heading">Daftar Mata Kuliah ({{ $mataKuliahList->count() }})</h3>
+                <span class="text-[11px] text-[#475569]">Klik Pakai atau Hapus</span>
+            </div>
+            <div class="max-h-64 overflow-y-auto divide-y divide-slate-100 text-xs">
+                @forelse($mataKuliahList as $mk)
+                    <div class="py-2.5 flex items-center justify-between gap-2">
+                        <div class="min-w-0">
+                            <span class="font-semibold theme-heading block truncate">{{ $mk->nama_mk }}</span>
+                            <span class="text-[11px] text-[#475569]">{{ $mk->kode_mk }} | {{ $mk->sks }} SKS ({{ $mk->jadwal_mk_count }} jadwal)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button type="button" class="px-2.5 py-1 rounded-lg bg-[#DBEAFE] text-[#1E3A8A] font-semibold hover:bg-[#BFDBFE] cursor-pointer"
+                                    onclick="document.getElementById('kode_mk').value=@js($mk->kode_mk === '-' ? '' : $mk->kode_mk);document.getElementById('nama_matakuliah').value=@js($mk->nama_mk);document.getElementById('sks').value=@js($mk->sks);">
+                                Pakai
+                            </button>
+                            <form action="{{ route('jadwal.mk.destroy', $mk) }}" method="POST" onsubmit="return confirm('Hapus mata kuliah {{ $mk->nama_mk }}?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="px-2.5 py-1 rounded-lg bg-red-50 text-red-700 font-semibold hover:bg-red-100 cursor-pointer">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @empty
+                    <p class="py-4 text-center text-slate-500">Belum ada data mata kuliah.</p>
+                @endforelse
+            </div>
+        </section>
+
+        <section class="theme-card-main rounded-3xl p-5 shadow-sm border theme-border">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b theme-border">
+                <h3 class="text-sm font-bold theme-heading">Daftar Dosen ({{ $dosenList->count() }})</h3>
+                <span class="text-[11px] text-[#475569]">Klik Pakai atau Hapus</span>
+            </div>
+            <div class="max-h-64 overflow-y-auto divide-y divide-slate-100 text-xs">
+                @forelse($dosenList as $d)
+                    <div class="py-2.5 flex items-center justify-between gap-2">
+                        <div class="min-w-0">
+                            <span class="font-semibold theme-heading block truncate">{{ $d->nama }}</span>
+                            <span class="text-[11px] text-[#475569]">NIP: {{ $d->nip }} ({{ $d->jadwal_mk_count }} jadwal)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button type="button" class="px-2.5 py-1 rounded-lg bg-[#DBEAFE] text-[#1E3A8A] font-semibold hover:bg-[#BFDBFE] cursor-pointer"
+                                    onclick="document.getElementById('dosen').value=@js($d->nama);document.getElementById('nip').value=@js($d->nip === '-' ? '' : $d->nip);">
+                                Pakai
+                            </button>
+                            <form action="{{ route('jadwal.dosen.destroy', $d) }}" method="POST" onsubmit="return confirm('Hapus dosen {{ $d->nama }}?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="px-2.5 py-1 rounded-lg bg-red-50 text-red-700 font-semibold hover:bg-red-100 cursor-pointer">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @empty
+                    <p class="py-4 text-center text-slate-500">Belum ada data dosen.</p>
+                @endforelse
+            </div>
+        </section>
+    </div>
 </div>
 
 <script>
@@ -295,19 +366,6 @@
                 const dayName = daysMap[d.getDay()];
                 if (dayName) {
                     daySelect.value = dayName;
-                }
-            });
-        }
-        const mkInput = document.getElementById('nama_matakuliah');
-        const sksInput = document.getElementById('sks');
-        const mkOptions = document.querySelectorAll('#mkList option');
-        if (mkInput && sksInput) {
-            mkInput.addEventListener('input', function () {
-                for (const opt of mkOptions) {
-                    if (opt.value === this.value && opt.dataset.sks) {
-                        sksInput.value = opt.dataset.sks;
-                        break;
-                    }
                 }
             });
         }

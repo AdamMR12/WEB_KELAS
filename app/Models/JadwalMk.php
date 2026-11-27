@@ -60,6 +60,11 @@ class JadwalMk extends Model
         return $this->mataKuliah?->nama_mk ?? '-';
     }
 
+    public function getKodeMkAttribute(): string
+    {
+        return $this->mataKuliah?->kode_mk ?? '';
+    }
+
     public function getSksAttribute(): int
     {
         return $this->mataKuliah?->sks ?? 0;
@@ -70,6 +75,11 @@ class JadwalMk extends Model
         return $this->dosenPengampu?->nama ?? '-';
     }
 
+    public function getNipDosenAttribute(): string
+    {
+        return $this->dosenPengampu?->nip ?? '';
+    }
+
     public function getRuangAttribute(): string
     {
         return $this->ruanganLokasi?->nama_ruangan ?? '-';
@@ -77,6 +87,6 @@ class JadwalMk extends Model
 
     public function getMetodeAttribute(): string
     {
-        return $this->tipe_sks ?? 'Praktikum Lab';
+        return $this->tipe_sks ?? 'Teori';
     }
 }

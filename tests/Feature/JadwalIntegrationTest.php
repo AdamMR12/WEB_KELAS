@@ -42,30 +42,48 @@ class JadwalIntegrationTest extends TestCase
 
         $this->actingAs($admin)
             ->post('/jadwal', [
+                'kode_mk' => 'SI301',
                 'nama_matakuliah' => 'Keamanan Siber',
                 'sks' => 3,
+                'tipe_sks' => 'Teori & Praktek',
                 'hari' => 'Kamis',
                 'tanggal' => '2026-11-26',
                 'jam_mulai' => '13:00',
                 'jam_selesai' => '15:00',
                 'ruang' => 'Lab Keamanan 1',
                 'dosen' => 'Pak Budi Santoso, M.Kom.',
+                'nip' => '198505052010011009',
                 'jenis' => 'Mata Kuliah Wajib',
-                'metode' => 'Praktikum Lab',
                 'warna_bg' => 'emerald',
                 'is_pengganti' => 0,
             ])
             ->assertRedirect(route('jadwal.index', ['tanggal' => '2026-11-26']));
 
         $jadwal = JadwalMk::whereHas('mataKuliah', fn ($q) => $q->where('nama_mk', 'Keamanan Siber'))->firstOrFail();
+        $this->assertSame('SI301', $jadwal->kode_mk);
+        $this->assertSame('Teori & Praktek', $jadwal->tipe_sks);
         $this->assertSame('Lab Keamanan 1', $jadwal->ruang);
         $this->assertSame('Pak Budi Santoso, M.Kom.', $jadwal->dosen);
+        $this->assertSame('198505052010011009', $jadwal->nip_dosen);
+
+        $mk = $jadwal->mataKuliah;
+        $dosen = $jadwal->dosenPengampu;
 
         $this->actingAs($admin)
             ->delete(route('jadwal.destroy', $jadwal))
             ->assertRedirect();
 
         $this->assertDatabaseMissing('jadwal_mk', ['id_jadwal' => $jadwal->id_jadwal]);
+
+        $this->actingAs($admin)
+            ->delete(route('jadwal.mk.destroy', $mk))
+            ->assertRedirect();
+        $this->assertDatabaseMissing('mata_kuliah', ['id_mk' => $mk->id_mk]);
+
+        $this->actingAs($admin)
+            ->delete(route('jadwal.dosen.destroy', $dosen))
+            ->assertRedirect();
+        $this->assertDatabaseMissing('dosen', ['id_dosen' => $dosen->id_dosen]);
 
         $catKode = AgendaCategory::firstOrFail()->kode;
         $statusNama = AgendaStatus::firstOrFail()->nama;

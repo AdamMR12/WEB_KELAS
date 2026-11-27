@@ -46,6 +46,8 @@ Route::middleware(['auth', 'verified', 'level:1'])->group(function () {
     Route::get('/jadwal/create', [ScheduleController::class, 'create'])->name('jadwal.create');
     Route::post('/jadwal', [ScheduleController::class, 'store'])->name('jadwal.store');
     Route::delete('/jadwal/{jadwalMk}', [ScheduleController::class, 'destroy'])->name('jadwal.destroy');
+    Route::delete('/jadwal/matakuliah/{mataKuliah}', [ScheduleController::class, 'destroyMataKuliah'])->name('jadwal.mk.destroy');
+    Route::delete('/jadwal/dosen/{dosen}', [ScheduleController::class, 'destroyDosen'])->name('jadwal.dosen.destroy');
 
     Route::get('/agenda/create', [AgendaController::class, 'create'])->name('agenda.create');
     Route::post('/agenda', [AgendaController::class, 'store'])->name('agenda.store');
