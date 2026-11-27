@@ -20,7 +20,7 @@
     @if(auth()->user()?->isAdmin())
     <div class="flex items-center gap-2">
         <!-- Button Buka Modal Kelola Kategori & Status -->
-        <button type="button" id="openManageModalBtn" data-press data-magnetic class="px-3.5 py-2 rounded-full bg-[#E0F2FE] hover:bg-[#BAE6FD] text-[#0C4A6E] text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer" title="Kelola Kategori & Status">
+        <button type="button" id="openManageModalBtn" data-press data-magnetic class="px-3.5 py-2 rounded-full bg-[#DBEAFE] hover:bg-[#BFDBFE] text-[#1E3A8A] text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer" title="Kelola Kategori & Status">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                 <circle cx="12" cy="12" r="3"/>
@@ -28,7 +28,7 @@
             <span class="hidden sm:inline">Kelola Kategori & Status</span>
         </button>
 
-        <a href="{{ route('agenda.create') }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#38BDF8] text-[#082F49] text-xs md:text-sm font-semibold hover:bg-[#0EA5E9] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
+        <a href="{{ route('agenda.create') }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#1D4ED8] text-white text-xs md:text-sm font-semibold hover:bg-[#1E40AF] transition shadow-xs flex items-center gap-1.5 cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
             </svg>
@@ -45,7 +45,7 @@
     <div id="agendaChips" class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-4 mb-5 border-b theme-border">
         <a href="{{ route('agenda.index', ['kategori' => 'SEMUA']) }}" 
            data-agenda-nav data-press class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition
-           {{ $kategori === 'SEMUA' ? 'bg-[#38BDF8] text-[#082F49] shadow-xs' : 'bg-transparent border theme-border text-slate-700 hover:bg-[#F0F9FF]' }}">
+           {{ $kategori === 'SEMUA' ? 'bg-[#1D4ED8] text-white shadow-xs' : 'bg-transparent border theme-border text-slate-700 hover:bg-[#F8FAFC]' }}">
             Semua Agenda ({{ $totalCount }})
         </a>
 
@@ -56,7 +56,7 @@
             @endphp
             <a href="{{ route('agenda.index', ['kategori' => $cat->kode]) }}" 
                data-agenda-nav data-press class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition
-               {{ $isActive ? 'bg-[#38BDF8] text-[#082F49] shadow-xs' : 'bg-transparent border theme-border text-slate-700 hover:bg-[#F0F9FF]' }}">
+               {{ $isActive ? 'bg-[#1D4ED8] text-white shadow-xs' : 'bg-transparent border theme-border text-slate-700 hover:bg-[#F8FAFC]' }}">
                 {{ $cat->nama }} ({{ $catCount }})
             </a>
         @endforeach
@@ -123,7 +123,7 @@
             <div data-agenda-item class="col-span-1 lg:col-span-2 py-12 text-center">
                 <p class="text-slate-500 text-xs">Belum ada agenda untuk kategori ini.</p>
                 @if(auth()->user()?->isAdmin())
-                <a href="{{ route('agenda.create') }}" class="inline-block mt-2.5 px-4 py-1.5 rounded-full bg-[#38BDF8] text-[#082F49] text-xs font-semibold hover:bg-[#0EA5E9] transition">
+                <a href="{{ route('agenda.create') }}" class="inline-block mt-2.5 px-4 py-1.5 rounded-full bg-[#1D4ED8] text-white text-xs font-semibold hover:bg-[#1E40AF] transition">
                     + Tambah Agenda Baru
                 </a>
                 @endif
@@ -153,13 +153,13 @@
 
         <!-- Modal Tabs -->
         <div role="tablist" class="relative flex border-b border-slate-100 px-6 shrink-0 text-xs font-bold">
-            <button type="button" role="tab" data-tab="panelKategori" aria-selected="true" class="py-3 px-4 text-[#0C4A6E] transition cursor-pointer">
+            <button type="button" role="tab" data-tab="panelKategori" aria-selected="true" class="py-3 px-4 text-[#1D4ED8] transition cursor-pointer">
                 Kategori Agenda ({{ $categories->count() }})
             </button>
             <button type="button" role="tab" data-tab="panelStatus" aria-selected="false" class="py-3 px-4 text-slate-400 hover:text-slate-600 transition cursor-pointer">
                 Status Agenda ({{ $statuses->count() }})
             </button>
-            <span data-tab-indicator aria-hidden="true" class="absolute bottom-0 left-0 h-0.5 w-0 bg-[#0C4A6E] rounded-full"></span>
+            <span data-tab-indicator aria-hidden="true" class="absolute bottom-0 left-0 h-0.5 w-0 bg-[#1D4ED8] rounded-full"></span>
         </div>
 
         <!-- Modal Body Scrollable -->
@@ -175,11 +175,11 @@
                         <div class="sm:col-span-2">
                             <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Nama Kategori</label>
                             <input type="text" name="nama" required placeholder="Contoh: Seminar Nasional" 
-                                   class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#38BDF8]">
+                                   class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1D4ED8]">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Tema Warna</label>
-                            <select name="warna_bg" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#38BDF8]">
+                            <select name="warna_bg" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1D4ED8]">
                                 <option value="amber">Amber / Orange</option>
                                 <option value="lime">Lime / Hijau</option>
                                 <option value="cyan">Cyan / Biru Muda</option>
@@ -191,7 +191,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end pt-1">
-                        <button type="submit" class="px-4 py-1.5 rounded-full bg-[#38BDF8] text-[#082F49] text-xs font-semibold hover:bg-[#0EA5E9] transition cursor-pointer">
+                        <button type="submit" class="px-4 py-1.5 rounded-full bg-[#1D4ED8] text-white text-xs font-semibold hover:bg-[#1E40AF] transition cursor-pointer">
                             + Tambah Kategori
                         </button>
                     </div>
@@ -233,8 +233,8 @@
                     <span class="font-bold text-xs text-slate-800 block">Tambah Status Baru</span>
                     <div class="flex gap-2">
                         <input type="text" name="nama" required placeholder="Contoh: Ditunda / Selesai / Terbuka" 
-                               class="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#38BDF8]">
-                        <button type="submit" class="px-4 py-2 rounded-full bg-[#38BDF8] text-[#082F49] text-xs font-semibold hover:bg-[#0EA5E9] transition cursor-pointer shrink-0">
+                               class="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#1D4ED8]">
+                        <button type="submit" class="px-4 py-2 rounded-full bg-[#1D4ED8] text-white text-xs font-semibold hover:bg-[#1E40AF] transition cursor-pointer shrink-0">
                             + Tambah Status
                         </button>
                     </div>

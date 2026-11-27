@@ -13,9 +13,11 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 Route::get('/', function () {
-    // Halaman utama diarahkan ke modul Kas Kelas.
-    // Jika belum login, middleware 'kas' akan meneruskan ke /kas/login.
-    return redirect()->route('kas.dashboard');
+    if (auth()->check()) {
+        return redirect()->route(auth()->user()->dashboardRoute());
+    }
+
+    return redirect()->route('login');
 })->name('home');
 
 // Guest (belum login)
@@ -44,6 +46,8 @@ Route::middleware(['auth', 'verified', 'level:1'])->group(function () {
     Route::get('/jadwal/create', [ScheduleController::class, 'create'])->name('jadwal.create');
     Route::post('/jadwal', [ScheduleController::class, 'store'])->name('jadwal.store');
     Route::delete('/jadwal/{jadwalMk}', [ScheduleController::class, 'destroy'])->name('jadwal.destroy');
+    Route::delete('/jadwal/matakuliah/{mataKuliah}', [ScheduleController::class, 'destroyMataKuliah'])->name('jadwal.mk.destroy');
+    Route::delete('/jadwal/dosen/{dosen}', [ScheduleController::class, 'destroyDosen'])->name('jadwal.dosen.destroy');
 
     Route::get('/agenda/create', [AgendaController::class, 'create'])->name('agenda.create');
     Route::post('/agenda', [AgendaController::class, 'store'])->name('agenda.store');

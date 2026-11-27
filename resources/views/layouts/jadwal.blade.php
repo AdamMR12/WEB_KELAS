@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Jadwal Perkuliahan & Agenda') - Web Kelas</title>
-    <script>
-        // Sembunyikan elemen animasi sampai script siap; fallback tampil jika JS gagal dimuat
-        document.documentElement.classList.add('js');
-        setTimeout(() => { if (!window.__animReady) document.documentElement.classList.remove('js'); }, 1200);
-    </script>
-    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=2">
-    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=2"></script>
+    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=6">
+    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=6"></script>
 </head>
-<body class="min-h-screen bg-[#F0F9FF] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#38BDF8] selection:text-[#082F49]">
+<body class="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#DBEAFE] selection:text-[#1E3A8A]">
 
     @auth
         @include('partials.navbar')
@@ -27,7 +22,7 @@
                     @yield('page_title')
                 </h1>
                 <p data-anim="hero" class="text-[#475569] text-xs mt-0.5">
-                    @yield('page_subtitle', 'Semester Ganjil 2026/2027 | D4 Sistem Informasi')
+                    @yield('page_subtitle', 'Semester Ganjil 2026/2027 | D3 Sistem Informasi')
                 </p>
             </div>
 
@@ -41,9 +36,9 @@
 
         <!-- FLASH MESSAGE -->
         @if(session('success'))
-            <div data-flash role="status" class="mb-4 px-4 py-2.5 rounded-2xl bg-[#E0F2FE] border border-[#BAE6FD] text-[#0C4A6E] text-xs font-semibold flex items-center justify-between shadow-xs">
+            <div data-flash role="status" class="mb-4 px-4 py-2.5 rounded-2xl bg-[#DBEAFE] border border-[#BFDBFE] text-[#1E3A8A] text-xs font-semibold flex items-center justify-between shadow-xs">
                 <span>{{ session('success') }}</span>
-                <button type="button" aria-label="Tutup notifikasi" class="text-[#0C4A6E]/80 hover:text-[#0C4A6E] text-base leading-none font-bold cursor-pointer">&times;</button>
+                <button type="button" aria-label="Tutup notifikasi" class="text-[#1E3A8A]/80 hover:text-[#1E3A8A] text-base leading-none font-bold cursor-pointer">&times;</button>
             </div>
         @endif
 
