@@ -3,7 +3,7 @@
 @section('title', 'Tambah Jadwal Perkuliahan')
 
 @section('page_title', 'Tambah Jadwal Perkuliahan')
-@section('page_subtitle', 'Semester Ganjil 2026/2027 | D4 Sistem Informasi')
+@section('page_subtitle', 'Semester Ganjil 2026/2027 | D3 Sistem Informasi')
 
 @section('hero_action')
     <a href="{{ route('jadwal.index', ['tanggal' => $selectedDate]) }}" data-magnetic data-press class="px-4 py-2 rounded-full bg-[#0369A1] text-white text-xs md:text-sm font-semibold hover:bg-[#075985] transition shadow-xs flex items-center gap-1.5 cursor-pointer">

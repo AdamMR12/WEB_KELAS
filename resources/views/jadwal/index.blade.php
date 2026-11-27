@@ -3,7 +3,7 @@
 @section('title', 'Jadwal Perkuliahan')
 
 @section('page_title', 'Jadwal Perkuliahan')
-@section('page_subtitle', 'Semester Ganjil 2026/2027 | D4 Sistem Informasi')
+@section('page_subtitle', 'Semester Ganjil 2026/2027 | D3 Sistem Informasi')
 
 @section('hero_stats')
     <div class="text-right">

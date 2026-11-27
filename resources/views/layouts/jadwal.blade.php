@@ -22,7 +22,7 @@
                     @yield('page_title')
                 </h1>
                 <p data-anim="hero" class="text-[#475569] text-xs mt-0.5">
-                    @yield('page_subtitle', 'Semester Ganjil 2026/2027 | D4 Sistem Informasi')
+                    @yield('page_subtitle', 'Semester Ganjil 2026/2027 | D3 Sistem Informasi')
                 </p>
             </div>
 
