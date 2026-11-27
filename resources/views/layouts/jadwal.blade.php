@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Jadwal Perkuliahan & Agenda') - Web Kelas</title>
-    <script>
-        // Sembunyikan elemen animasi sampai script siap; fallback tampil jika JS gagal dimuat
-        document.documentElement.classList.add('js');
-        setTimeout(() => { if (!window.__animReady) document.documentElement.classList.remove('js'); }, 1200);
-    </script>
-    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=4">
-    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=4"></script>
+    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=5">
+    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=5"></script>
 </head>
 <body class="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#DBEAFE] selection:text-[#1E3A8A]">
 

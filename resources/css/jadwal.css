@@ -56,30 +56,3 @@ body {
 .theme-border {
     border-color: var(--border-color);
 }
-
-/* ---------- Animasi interaktif (GSAP / Motion / Lenis) ---------- */
-/* Sembunyikan elemen sebelum intro GSAP berjalan; kelas .js dipasang di <head> */
-.js [data-anim],
-.js [data-reveal] {
-    visibility: hidden;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .js [data-anim],
-    .js [data-reveal] {
-        visibility: visible;
-    }
-}
-
-/* Transform dikendalikan JS, jadi CSS transition tidak boleh ikut menganimasikannya */
-[data-press],
-[data-tilt],
-[data-magnetic],
-[data-hover-lift],
-[data-reveal] {
-    transition-property: color, background-color, border-color, box-shadow;
-}
-
-[data-anim="title"] {
-    overflow: hidden;
-}
