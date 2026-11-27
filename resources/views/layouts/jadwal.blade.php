@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Jadwal Perkuliahan & Agenda') - Web Kelas</title>
-    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=5">
-    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=5"></script>
+    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=6">
+    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=6"></script>
 </head>
 <body class="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#DBEAFE] selection:text-[#1E3A8A]">
 

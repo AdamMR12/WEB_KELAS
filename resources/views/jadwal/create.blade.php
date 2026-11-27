@@ -135,9 +135,9 @@
                 </div>
                 <div>
                     <label for="nip" class="block font-bold uppercase tracking-wider theme-heading mb-1.5 text-xs">
-                        NIP Dosen
+                        NIP Dosen <span class="font-normal normal-case tracking-normal text-[#475569]">(Opsional)</span>
                     </label>
-                    <input type="text" id="nip" name="nip" value="{{ old('nip') }}" placeholder="Contoh: 198801012015041001"
+                    <input type="text" id="nip" name="nip" value="{{ old('nip') }}" placeholder="Opsional, boleh dikosongkan"
                            class="w-full px-4 py-3 rounded-2xl border theme-border text-sm theme-heading focus:ring-2 focus:ring-[#1D4ED8] focus:outline-hidden transition placeholder:text-slate-400">
                 </div>
                 <div>
@@ -329,11 +329,16 @@
                     <div class="py-2.5 flex items-center justify-between gap-2">
                         <div class="min-w-0">
                             <span class="font-semibold theme-heading block truncate">{{ $d->nama }}</span>
-                            <span class="text-[11px] text-[#475569]">NIP: {{ $d->nip }} ({{ $d->jadwal_mk_count }} jadwal)</span>
+                            <span class="text-[11px] text-[#475569]">
+                                @if($d->nip && $d->nip !== '-')
+                                    NIP: {{ $d->nip }} |
+                                @endif
+                                {{ $d->jadwal_mk_count }} jadwal
+                            </span>
                         </div>
                         <div class="flex items-center gap-1.5 shrink-0">
                             <button type="button" class="px-2.5 py-1 rounded-lg bg-[#DBEAFE] text-[#1E3A8A] font-semibold hover:bg-[#BFDBFE] cursor-pointer"
-                                    onclick="document.getElementById('dosen').value=@js($d->nama);document.getElementById('nip').value=@js($d->nip === '-' ? '' : $d->nip);">
+                                    onclick="document.getElementById('dosen').value=@js($d->nama);document.getElementById('nip').value=@js($d->nip && $d->nip !== '-' ? $d->nip : '');">
                                 Pakai
                             </button>
                             <form action="{{ route('jadwal.dosen.destroy', $d) }}" method="POST" onsubmit="return confirm('Hapus dosen {{ $d->nama }}?')">

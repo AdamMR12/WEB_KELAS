@@ -139,7 +139,7 @@ class ScheduleController extends Controller
         $nip = trim($validated['nip'] ?? '');
         $dosen = Dosen::firstOrCreate(
             ['nama' => trim($validated['dosen'])],
-            ['nip' => $nip !== '' ? $nip : '-']
+            ['nip' => $nip !== '' ? $nip : null]
         );
         if ($nip !== '' && $dosen->nip !== $nip) {
             $dosen->update(['nip' => $nip]);

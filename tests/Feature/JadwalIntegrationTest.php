@@ -3,9 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\AgendaCategory;
+use App\Models\AgendaNonAkademik;
 use App\Models\AgendaStatus;
+use App\Models\Dosen;
 use App\Models\JadwalAgenda;
 use App\Models\JadwalMk;
+use App\Models\MataKuliah;
+use App\Models\Ruangan;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,16 +23,50 @@ class JadwalIntegrationTest extends TestCase
         $this->seed();
         $mahasiswa = User::where('level', User::LEVEL_USER)->firstOrFail();
 
+        $mk = MataKuliah::create(['kode_mk' => 'SI201', 'nama_mk' => 'Pemrograman Web', 'sks' => 3]);
+        $dosen = Dosen::create(['nama' => 'Pak Hendra, M.Kom.', 'nip' => null]);
+        $ruang = Ruangan::create(['nama_ruangan' => 'Lab Komputer 3']);
+
+        JadwalMk::create([
+            'id_mk' => $mk->id_mk,
+            'id_dosen' => $dosen->id_dosen,
+            'id_ruangan' => $ruang->id_ruangan,
+            'hari' => 'Rabu',
+            'tanggal' => '2026-11-25',
+            'jam_mulai' => '08:00:00',
+            'jam_selesai' => '10:00:00',
+            'tipe_sks' => 'Teori & Praktek',
+            'jenis' => 'Mata Kuliah Wajib',
+            'warna_bg' => 'lime',
+            'is_pengganti' => false,
+        ]);
+
+        $agendaMaster = AgendaNonAkademik::create([
+            'nama_agenda' => 'Rapat Koordinasi Kelas',
+            'kategori' => AgendaCategory::firstOrFail()->kode,
+            'status' => AgendaStatus::firstOrFail()->nama,
+            'koordinator' => 'Ketua Kelas',
+        ]);
+        JadwalAgenda::create([
+            'id_agenda' => $agendaMaster->id_agenda,
+            'id_ruangan' => $ruang->id_ruangan,
+            'tanggal' => '2026-11-25',
+            'tanggal_display' => 'Rabu, 25 Nov 2026',
+            'jam_mulai' => '15:00:00',
+            'waktu_label' => '15:00 WIB',
+        ]);
+
         $this->actingAs($mahasiswa)
             ->get('/jadwal?tanggal=2026-11-25')
             ->assertOk()
             ->assertSee('Pemrograman Web')
+            ->assertDontSee('(NIP:')
             ->assertDontSee('Tambah Jadwal');
 
         $this->actingAs($mahasiswa)
             ->get('/agenda')
             ->assertOk()
-            ->assertSee('Hackathon Inovasi Digital Mahasiswa 2026');
+            ->assertSee('Rapat Koordinasi Kelas');
 
         $this->actingAs($mahasiswa)
             ->get('/jadwal/create')
@@ -52,7 +90,7 @@ class JadwalIntegrationTest extends TestCase
                 'jam_selesai' => '15:00',
                 'ruang' => 'Lab Keamanan 1',
                 'dosen' => 'Pak Budi Santoso, M.Kom.',
-                'nip' => '198505052010011009',
+                'nip' => '',
                 'jenis' => 'Mata Kuliah Wajib',
                 'warna_bg' => 'emerald',
                 'is_pengganti' => 0,
@@ -64,7 +102,8 @@ class JadwalIntegrationTest extends TestCase
         $this->assertSame('Teori & Praktek', $jadwal->tipe_sks);
         $this->assertSame('Lab Keamanan 1', $jadwal->ruang);
         $this->assertSame('Pak Budi Santoso, M.Kom.', $jadwal->dosen);
-        $this->assertSame('198505052010011009', $jadwal->nip_dosen);
+        $this->assertNull($jadwal->dosenPengampu->nip);
+        $this->assertSame('', $jadwal->nip_dosen);
 
         $mk = $jadwal->mataKuliah;
         $dosen = $jadwal->dosenPengampu;
