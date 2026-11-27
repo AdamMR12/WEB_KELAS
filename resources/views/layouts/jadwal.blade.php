@@ -10,8 +10,8 @@
         document.documentElement.classList.add('js');
         setTimeout(() => { if (!window.__animReady) document.documentElement.classList.remove('js'); }, 1200);
     </script>
-    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=3">
-    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=3"></script>
+    <link rel="stylesheet" href="{{ asset('assets-jadwal/style.css') }}?v=4">
+    <script type="module" src="{{ asset('assets-jadwal/script.js') }}?v=4"></script>
 </head>
 <body class="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#DBEAFE] selection:text-[#1E3A8A]">
 
